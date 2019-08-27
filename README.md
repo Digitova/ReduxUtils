@@ -1,6 +1,6 @@
 # ReduxUtils
 
-### arrayify
+## arrayify
 Arrayify is a simple utility that checks to see if the data passed to it is an array.  If the data is an array it returns the data as is.  If the data is not an array it returns the data wrapped in an array.  If the data is null or undefined it returns an empty array.
 
 Usage: 
@@ -18,7 +18,7 @@ Usage:
     const cars3 = arrayify(null)     // cars3 is an empty array []
        
 
-### createReducer
+## createReducer
 createReducer is a simple function that is a part of lots of redux libraries.  It simplifies the boilerplate for creating reducers.
 
 Usage:
@@ -30,7 +30,7 @@ Usage:
     })
 
 
-### ReducerFactories
+## ReducerFactories
 ReducerFactories are a powerful state normalization abstraction that really allows you to create very clean and simple reducers.  The reducer factories use normalizr to normalize the data and simplify the boilerplate needed to put list data into redux.
 
 
@@ -137,7 +137,7 @@ See the following example reducer that uses these factories:
     })
     
     export const sampleStateEntry = combineReducers({
-        result: idsReducer,
+        ids: idsReducer,
         entities: entitiesReducer,
         deleteEntity: deleteReducer,
         isRefreshing: isRefreshingReducer,
@@ -145,9 +145,37 @@ See the following example reducer that uses these factories:
     })
     
 
-### GenericSchema
+## GenericSchema
+GenericSchema is very basic and simplified schema for normalizr.  It assumes the action entity prop name is "entities"
 
-### NormalizedCollection
+## NormalizedCollection
+NormalizedCollection is a class that can be used to fetch normalized data in a selector.
+
+Usage:
+
+    const entityCollection = new NormalizedCollection(entities, ids)
+    
+    const items = entityCollection.getItems() // returns array of all items
+    const item = entityCollection.find(itemId) // returns the object by id
+    
+Example selectors:
+
+    import { NormalizedCollection } from 'ReduxUtils'
+    
+    export function selectCarsCollection(state: Object): NormalizedCollection {
+        const {cars} = state
+        return new NormalizedCollection(cars.entities, cars.ids)
+    }
+    
+    export function selectCarsList(state: Object): Array<Object> {
+        const Cars = selectCarsCollection(state)
+        return Cars.getItems()
+    }
+    
+    export function selectCar(state: Object, carId: Number): Object {
+        const Cars = selectCarsCollection(state)
+        return Cars.find(carId)
+    }
 
 
 
