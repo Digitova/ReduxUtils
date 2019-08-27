@@ -1,16 +1,16 @@
-f// @flow
-import GenericSchema from './GenericSchema'
-import {eraseId, isRefreshing, lastUpdated, putEntities, putIds} from './ReducerFactories';
+// @flow
 import {combineReducers} from 'redux';
-import createReducer from "./createReducer";
+import GenericSchema from '../schema/GenericSchema'
+import {eraseId, isRefreshing, lastUpdated, putEntities, putIds} from '../reducers/ReducerFactories';
+import createReducer from "../reducers/createReducer";
 
 
 const idsReducer = createReducer([], {
-    ['PUT_SOME_ENTIPTY']: putIds('entities', GenericSchema),
+    ['PUT_SOME_ENTITY']: putIds('entities', GenericSchema),
 })
 
 const entitiesReducer = createReducer({}, {
-    ['PUT_SOME_ENTIPTY']: putEntities('entities', GenericSchema),
+    ['PUT_SOME_ENTITY']: putEntities('entities', GenericSchema),
 })
 
 const isRefreshingReducer = createReducer(false, {
@@ -22,11 +22,11 @@ const deleteReducer = createReducer(false, {
 })
 
 const lastUpdatedReducer = createReducer('never', {
-    ['PUT_SOME_ENTIPTY']: lastUpdated(),
+    ['PUT_SOME_ENTITY']: lastUpdated(),
     ['SOME_ENTITY_DELETED']: lastUpdated()
 })
 
-export const authentication = combineReducers({
+export const sampleStateEntry = combineReducers({
     result: idsReducer,
     entities: entitiesReducer,
     deleteEntity: deleteReducer,

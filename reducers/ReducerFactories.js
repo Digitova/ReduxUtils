@@ -1,6 +1,6 @@
 // @flow
 import {normalize} from "normalizr"
-import arrayify from "../../library/utils/arrayify";
+import arrayify from "../utils/arrayify";
 
 
 export const putIds = (actionPayloadProp: string, schema: Object) => (state: Object, action: Object): Array<Object> => {
