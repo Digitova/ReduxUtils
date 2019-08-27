@@ -19,6 +19,16 @@ Usage:
        
 
 ### createReducer
+createReducer is a simple function that is a part of lots of redux libraries.  It simplifies the boilerplate for creating reducers.
+
+Usage:
+
+    import {createReducer} from ReduxUtils
+    
+    const carReducer = createReducer({}, {
+      ['PUT_CAR']: (state, action) => action.payload.car,
+    })
+
 
 ### ReducerFactories
 
